@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-.brand-logo img{
+.brand-logo img {
     margin-right: 10px;
 }
 
@@ -92,3 +92,22 @@
     margin-bottom: 20px;
 }
 
+/* ====== REGISTRATION USER PAGE ====== */
+.user-registration {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.user-registration .row {
+    display: flex;
+    width: 100% !important;
+}
+
+.user-registration button {
+    margin: 0 auto;
+}
+
+.helper-text.invalid {
+    color: #f44336
+}
