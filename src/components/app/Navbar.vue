@@ -1,6 +1,8 @@
 <template>
   <nav>
     <div class="nav-wrapper">
+      <router-link to="/" class="brand-logo"><img src="@/assets/image/logo.png" alt=""><span>Provider</span>
+      </router-link>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
           <router-link to="/services">Services</router-link>
@@ -17,6 +19,7 @@
       </ul>
     </div>
   </nav>
+
 </template>
 
 <script>
