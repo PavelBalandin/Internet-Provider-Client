@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+select{
+    display: block;
+}
+
 /* ====== HEADER ====== */
 .nav-wrapper {
     background-color: #212121;
@@ -110,4 +114,32 @@
 
 .helper-text.invalid {
     color: #f44336
+}
+
+/* ====== UPDATE USER PAGE ====== */
+.user-update{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.user-update .find-form {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+}
+
+.user-update form .row {
+    display: flex;
+    width: 100% !important;
+}
+
+.user-update .find-form .row-button {
+    width: 10% !important;
+}
+
+.update-form{
+    display: flex;
+    flex-direction: row;
 }
