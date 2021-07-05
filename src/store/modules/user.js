@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const URL = process.env.VUE_APP_URL;
+const HOST = process.env.VUE_APP_HOST;
 
 export default {
     actions: {
@@ -14,7 +15,7 @@ export default {
         },
 
         async registerUser(context, user) {
-            const res = await axios.post(URL + '/users', user);
+            const res = await axios.post(HOST + '/register', user);
             return res.status;
         },
 

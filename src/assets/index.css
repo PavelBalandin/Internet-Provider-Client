@@ -4,7 +4,7 @@
     margin: 0;
 }
 
-select{
+select {
     display: block;
 }
 
@@ -117,7 +117,7 @@ select{
 }
 
 /* ====== UPDATE USER PAGE ====== */
-.user-update{
+.user-update {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -139,7 +139,36 @@ select{
     width: 10% !important;
 }
 
-.update-form{
+.update-form {
     display: flex;
     flex-direction: row;
+}
+
+/* ====== EDIT TARIFF PAGE ====== */
+.edit-tariff {
+    display: flex;
+    width: 100%;
+}
+
+.tariff-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.options {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.options select {
+    width: 20%;
+}
+
+
+.tariff-list button {
+    width: 100%;
 }
