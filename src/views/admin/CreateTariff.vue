@@ -37,6 +37,11 @@ export default {
     ...mapActions(['fetchServices', 'createTariff', 'fetchPaginatedTariffs']),
     async create() {
       const status = await this.createTariff(this.tariff);
+      this.tariff.name = '';
+      this.tariff.description = '';
+      this.tariff.duration = '';
+      this.tariff.price = '';
+      this.tariff.service= '';
       await this.fetchPaginatedTariffs();
     }
   },

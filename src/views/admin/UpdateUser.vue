@@ -50,7 +50,7 @@
           <td>{{ user.login }}</td>
           <td><input name="firstName" type="text" v-model:value="user.firstName"></td>
           <td><input name="lastName" type="text" v-model:value="user.lastName"></td>
-          <td>{{ user.role.name }}</td>
+          <td>{{ user.roleList[0].name }}</td>
           <td>
             <select v-model="user.status.id">
               <option v-bind:value="1" v-bind:selected="user.status.id === 1">Enable</option>
@@ -91,10 +91,12 @@ export default {
       if (this.$v.$invalid) {
         this.$v.$touch();
       } else {
-        const status = await this.fetchUser(this.input);
-        if (status === 200) {
-          this.user = this.getUser;
-        }else{
+        try {
+          const status = await this.fetchUser(this.input);
+          if (status === 200) {
+            this.user = this.getUser;
+          }
+        } catch (e) {
           this.$message('User hasn\'t been founded');
         }
       }

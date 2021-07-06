@@ -24,17 +24,17 @@ export default {
         },
 
         async createTariff(context, tariff) {
-            const res = await axios.post(URL + '/tariffs', tariff);
+            const res = await axios.post(URL + '/tariffs', tariff, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
             return res.status;
         },
 
         async updateTariff(context, tariff) {
-            const res = await axios.put(URL + '/tariffs/' + +tariff.id, tariff);
+            const res = await axios.put(URL + '/tariffs/' + +tariff.id, tariff, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
             return res.status;
         },
 
         async deleteTariff(context, id) {
-            const res = await axios.delete(URL + '/tariffs/' + id);
+            const res = await axios.delete(URL + '/tariffs/' + id, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
             return res.status;
         },
 
