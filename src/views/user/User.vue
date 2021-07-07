@@ -18,7 +18,6 @@ export default {
       links: [
         {title: 'Order', url: '/user/order', exact: true},
         {title: 'Tariffs', url: '/user/tariffs'},
-        {title: 'AddPayment', url: '/user/add-payment'},
         {title: 'Payments', url: '/user/payments'},
       ]
     }

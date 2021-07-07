@@ -47,12 +47,6 @@ const routes = [
                 component: () => import('../views/user/Tariffs.vue')
             },
             {
-                path: 'add-payment',
-                name: 'add-payment',
-                meta: {layout: 'main'},
-                component: () => import('../views/user/AddPayments.vue')
-            },
-            {
                 path: 'payments',
                 name: 'payments',
                 meta: {layout: 'main'},
