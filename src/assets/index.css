@@ -174,3 +174,8 @@ select {
 }
 
 /* ====== PAYMENTS PAGE ====== */
+
+/* ====== USER TARIFF PAGE ====== */
+.tariff-table{
+    width: 100%;
+}

@@ -40,6 +40,13 @@ export default {
 
         async updatePaginationOption(context, option) {
             context.commit('updateOption', option);
+        },
+
+        async fetchUserTariffs(context) {
+            const res = await axios.get(URL + '/tariffs/user/' + JSON.parse(localStorage.getItem('user')).id);
+            const userTariffs = await res.data;
+            context.commit('updateUserTariffs', userTariffs);
+            return res.status;
         }
 
     },
@@ -52,6 +59,9 @@ export default {
         },
         updateOption(state, option) {
             state.option = option;
+        },
+        updateUserTariffs(state, userTariffs) {
+            state.userTariffs = userTariffs;
         }
     },
     state: {
@@ -62,7 +72,9 @@ export default {
             order: 'ASC',
             size: 4,
             page: 0
-        }
+        },
+
+        userTariffs: []
     },
     getters: {
         getTariffs(state) {
@@ -75,6 +87,10 @@ export default {
 
         getOption(state) {
             return state.option;
+        },
+
+        getUserTariffs(state) {
+            return state.userTariffs;
         }
     }
 }
