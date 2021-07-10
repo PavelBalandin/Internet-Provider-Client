@@ -14,7 +14,7 @@
     />
     </tbody>
     <tr>
-      <td>Total</td>
+      <td><b>Total:</b></td>
       <td>{{ getPayments.map(obj => obj.payment).reduce((a, b) => a + b, 0) }}</td>
     </tr>
   </table>

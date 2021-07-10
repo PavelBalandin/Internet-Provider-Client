@@ -7,11 +7,12 @@
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Order</th>
+        <th>Service</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
-      <TariffItem v-for="(tariff, index) in getTariffs"
+      <TariffItem v-for="(tariff, index) in getOrder"
                   v-bind:tariff="tariff"
                   v-bind:index="index+1"
       />
@@ -21,17 +22,13 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
 import TariffItem from "./TariffItem";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: "Tariffs",
+  name: "TariffList",
   components: {TariffItem},
-  computed: mapGetters(["getTariffs"]),
-  methods: mapActions(['fetchTariffs']),
-  async mounted() {
-    this.fetchTariffs(this.$route.query.service_id);
-  }
+  computed: mapGetters(["getOrder"]),
 }
 </script>
 

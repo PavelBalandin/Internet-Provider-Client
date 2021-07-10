@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <table class="striped">
       <thead>
       <tr>
@@ -28,7 +28,7 @@ export default {
   computed: mapGetters(["getServices"]),
   methods: mapActions(['fetchServices']),
   async mounted() {
-    this.fetchServices();
+    await this.fetchServices();
   }
 }
 </script>

@@ -20,13 +20,13 @@ const routes = [
         path: '/tariffs',
         name: 'tariffs',
         meta: {layout: 'main'},
-        component: () => import('../views/Tariffs.vue')
+        component: () => import('../views/tariffs/Tariffs.vue')
     },
     {
         path: '/services',
         name: 'services',
         meta: {layout: 'main'},
-        component: () => import('../views/Services.vue')
+        component: () => import('../views/service/Services.vue')
     },
     {
         path: '/user',
@@ -38,7 +38,7 @@ const routes = [
                 path: 'order',
                 name: 'order',
                 meta: {layout: 'main'},
-                component: () => import('../views/user/Order.vue')
+                component: () => import('../views/user/order/Order.vue')
             },
             {
                 path: 'tariffs',

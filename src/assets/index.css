@@ -4,20 +4,37 @@
     margin: 0;
 }
 
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
 select {
     display: block;
+}
+
+.custom-link {
+    cursor: pointer;
 }
 
 /* ====== HEADER ====== */
 .nav-wrapper {
     background-color: #212121;
-    padding: 0 20px;
+}
+
+.nav-container {
+    width: 90%;
+    margin: 0 auto;
 }
 
 .brand-logo {
     height: 100%;
     display: flex !important;
     align-items: center;
+}
+
+.logo-title {
+    font-size: 22px;
 }
 
 .brand-logo img {
@@ -176,6 +193,14 @@ select {
 /* ====== PAYMENTS PAGE ====== */
 
 /* ====== USER TARIFF PAGE ====== */
-.tariff-table{
+.tariff-table {
     width: 100%;
+}
+
+/* ====== ORDER USER PAGE ====== */
+.order-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
 }
