@@ -20,16 +20,16 @@
           <td>{{ getUser.id }}</td>
           <td>{{ getUser.login }}</td>
           <td>
-              <input name="firstName" type="text" v-model:value="getUser.firstName">
-              <div class="error-container">
-                <small v-if="error.firstName !== null" class="helper-text invalid">{{ error.firstName }}</small>
-              </div>
+            <input name="firstName" type="text" v-model.trim="getUser.firstName">
+            <div class="error-container">
+              <small v-if="error.firstName !== null" class="helper-text invalid">{{ error.firstName }}</small>
+            </div>
           </td>
           <td>
-              <input name="lastName" type="text" v-model:value="getUser.lastName">
-              <div class="error-container">
-                <small v-if="error.lastName !== null" class="helper-text invalid">{{ error.lastName }}</small>
-              </div>
+            <input name="lastName" type="text" v-model.trim="getUser.lastName">
+            <div class="error-container">
+              <small v-if="error.lastName !== null" class="helper-text invalid">{{ error.lastName }}</small>
+            </div>
           </td>
           <td>{{ getUser.roleList[0].name }}</td>
           <td>
@@ -52,6 +52,7 @@
 <script>
 import {mapActions, mapGetters} from 'vuex'
 import FindUser from "./FindUser";
+import v from "../../utils/validation";
 
 export default {
   name: "Update",
@@ -68,12 +69,12 @@ export default {
   methods: {
     ...mapActions(['wipeUser', 'updateUser']),
     async upUser() {
-      if (!this.getUser.firstName || this.getUser.firstName.length > 30) {
+      if (!v.validate(v.reg.name, this.getUser.firstName)) {
         this.error.firstName = "Fill the field correctly"
       } else {
         this.error.firstName = null
       }
-      if (!this.getUser.lastName || this.getUser.lastName.length > 30) {
+      if (!v.validate(v.reg.name, this.getUser.lastName)) {
         this.error.lastName = "Fill the field correctly"
       } else {
         this.error.lastName = null
