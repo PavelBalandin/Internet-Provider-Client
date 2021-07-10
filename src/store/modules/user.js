@@ -31,6 +31,10 @@ export default {
             return res.status;
         },
 
+        wipeUser(context) {
+            context.commit('updateUser', null);
+        },
+
         async loginUser(context, authUser) {
             const res = await axios.post(HOST + '/auth', authUser);
             if (res.status === 200) {
@@ -46,7 +50,7 @@ export default {
         }
     },
     state: {
-        user: Object,
+        user: null,
         users: []
     },
     getters: {

@@ -161,6 +161,10 @@ select {
     flex-direction: row;
 }
 
+.error-container{
+    height: 10px;
+}
+
 /* ====== EDIT TARIFF PAGE ====== */
 .edit-tariff {
     display: flex;

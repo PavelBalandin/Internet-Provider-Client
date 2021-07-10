@@ -1,36 +1,7 @@
 <template>
   <div class="user-update">
-    <form class="find-form" @submit.prevent="findUser">
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="input" type="text"
-                 class="validate"
-                 name="input"
-                 v-model.trim="input"
-                 :class="{invalid: ($v.input.$dirty && !$v.input.required) || ($v.input.$dirty && !$v.input.minLength) || ($v.input.$dirty && !$v.input.maxLength)}"
-          >
-          <label for="input">Login</label>
-          <small
-              class="helper-text invalid"
-              v-if="$v.input.$dirty && !$v.input.required"
-          >You need to enter login</small>
-          <small
-              class="helper-text invalid"
-              v-else-if="$v.input.$dirty && !$v.input.minLength"
-          >Login must be 2 characters or more. Now is {{ input.length }}</small>
-          <small
-              class="helper-text invalid"
-              v-else-if="$v.input.$dirty && !$v.input.maxLength"
-          >Login must be no longer than 30 characters. Now is {{ input.length }}</small>
-        </div>
-      </div>
-      <div class="row row-button">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Find
-          <i class="material-icons right">send</i>
-        </button>
-      </div>
-    </form>
-    <form class="update-form" action="" v-if="user !== null" @submit.prevent="upUser">
+    <FindUser/>
+    <form class="update-form" action="" v-if="getUser !== null" @submit.prevent="upUser">
       <table>
         <thead>
         <tr>
@@ -46,15 +17,25 @@
 
         <tbody>
         <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.login }}</td>
-          <td><input name="firstName" type="text" v-model:value="user.firstName"></td>
-          <td><input name="lastName" type="text" v-model:value="user.lastName"></td>
-          <td>{{ user.roleList[0].name }}</td>
+          <td>{{ getUser.id }}</td>
+          <td>{{ getUser.login }}</td>
           <td>
-            <select v-model="user.status.id">
-              <option v-bind:value="1" v-bind:selected="user.status.id === 1">Enable</option>
-              <option v-bind:value="2" v-bind:selected="user.status.id === 2">Disable</option>
+              <input name="firstName" type="text" v-model:value="getUser.firstName">
+              <div class="error-container">
+                <small v-if="error.firstName !== null" class="helper-text invalid">{{ error.firstName }}</small>
+              </div>
+          </td>
+          <td>
+              <input name="lastName" type="text" v-model:value="getUser.lastName">
+              <div class="error-container">
+                <small v-if="error.lastName !== null" class="helper-text invalid">{{ error.lastName }}</small>
+              </div>
+          </td>
+          <td>{{ getUser.roleList[0].name }}</td>
+          <td>
+            <select v-model="getUser.status.id">
+              <option v-bind:value="1" v-bind:selected="getUser.status.id === 1">Enable</option>
+              <option v-bind:value="2" v-bind:selected="getUser.status.id === 2">Disable</option>
             </select>
           </td>
           <td>
@@ -69,45 +50,43 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
-import {maxLength, minLength, required} from "vuelidate/lib/validators";
-import user from "../../store/modules/user";
+import {mapActions, mapGetters} from 'vuex'
+import FindUser from "./FindUser";
 
 export default {
   name: "Update",
+  components: {FindUser},
+  computed: mapGetters(["getUser"]),
   data() {
     return {
-      input: '',
-      user: null,
+      error: {
+        firstName: null,
+        lastName: null,
+      }
     }
   },
-  validations: () => ({
-    input: {required, minLength: minLength(2), maxLength: maxLength(30)}
-  }),
-  computed: mapGetters(["getUser"]),
   methods: {
-    ...mapActions(['fetchUser', 'updateUser']),
-    async findUser() {
-      if (this.$v.$invalid) {
-        this.$v.$touch();
-      } else {
-        try {
-          const status = await this.fetchUser(this.input);
-          if (status === 200) {
-            this.user = this.getUser;
-          }
-        } catch (e) {
-          this.$message('User hasn\'t been founded');
-        }
-      }
-    },
-
+    ...mapActions(['wipeUser', 'updateUser']),
     async upUser() {
-      const status = await this.updateUser(this.user);
-      if (status === 200) {
-        this.$message('User has been successfully updated');
+      if (!this.getUser.firstName || this.getUser.firstName.length > 30) {
+        this.error.firstName = "Fill the field correctly"
       } else {
-        this.$message('Something gonna wrong');
+        this.error.firstName = null
+      }
+      if (!this.getUser.lastName || this.getUser.lastName.length > 30) {
+        this.error.lastName = "Fill the field correctly"
+      } else {
+        this.error.lastName = null
+      }
+
+      if (this.error.firstName == null && this.error.lastName == null) {
+        const status = await this.updateUser(this.getUser);
+        if (status === 200) {
+          this.$message('User has been successfully updated');
+          this.wipeUser();
+        } else {
+          this.$message('Something gonna wrong');
+        }
       }
     }
   }
