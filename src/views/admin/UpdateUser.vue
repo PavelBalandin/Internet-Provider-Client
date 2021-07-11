@@ -86,7 +86,7 @@ export default {
           this.$message('User has been successfully updated');
           this.wipeUser();
         } else {
-          this.$message('Something gonna wrong');
+          this.$message('Something went wrong');
         }
       }
     }

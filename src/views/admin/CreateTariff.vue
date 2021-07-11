@@ -99,12 +99,17 @@ export default {
           this.invDuration == null && this.invPrice == null &&
           this.invService == null) {
         const status = await this.createTariff(this.tariff);
-        this.tariff.name = '';
-        this.tariff.description = '';
-        this.tariff.duration = '';
-        this.tariff.price = '';
-        this.tariff.service = null;
-        await this.fetchPaginatedTariffs();
+        if (status === 201) {
+          this.$message('Tariff has been successfully created');
+          this.tariff.name = '';
+          this.tariff.description = '';
+          this.tariff.duration = '';
+          this.tariff.price = '';
+          this.tariff.service = null;
+          await this.fetchPaginatedTariffs();
+        }else {
+          this.$message('Something went wrong');
+        }
       }
     }
   },

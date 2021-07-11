@@ -88,12 +88,22 @@ export default {
 
       if (this.invName == null && this.invDescription == null && this.invDuration == null && this.invPrice == null) {
         const status = await this.updateTariff(this.tariff);
-        await this.fetchPaginatedTariffs();
+        if (status === 200) {
+          await this.fetchPaginatedTariffs();
+          this.$message('Tariff has been successfully updated');
+        } else {
+          this.$message('Something went wrong');
+        }
       }
     },
     async deleteItem() {
       const status = await this.deleteTariff(this.tariff.id);
-      await this.fetchPaginatedTariffs();
+      if (status === 204) {
+        await this.fetchPaginatedTariffs();
+        this.$message('Tariff has been successfully deleted');
+      } else {
+        this.$message('Something went wrong');
+      }
     },
   }
 }
