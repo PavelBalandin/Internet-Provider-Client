@@ -141,7 +141,6 @@ export default {
           role: {id: 1},
           status: {id: 1}
         });
-        console.log(status)
         if (status === 201) {
           this.alreadyInUse = false
           this.login = ''

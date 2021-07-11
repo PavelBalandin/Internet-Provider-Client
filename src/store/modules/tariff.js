@@ -43,7 +43,7 @@ export default {
         },
 
         async fetchUserTariffs(context) {
-            const res = await axios.get(URL + '/tariffs/user/' + JSON.parse(localStorage.getItem('user')).id);
+            const res = await axios.get(URL + '/tariffs/user', {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
             const userTariffs = await res.data;
             context.commit('updateUserTariffs', userTariffs);
             return res.status;

@@ -17,8 +17,15 @@ export default {
   computed: mapGetters(["getOrder"]),
   methods: {
     ...mapActions(['makeOrder']),
-    sendOrder() {
-      this.makeOrder();
+    async sendOrder() {
+      const res = await this.makeOrder();
+      if (res.status === 201) {
+        this.$message('Order has been created');
+      } else if (res.data.message === 'Not enough funds') {
+        this.$message('Not enough funds');
+      } else {
+        this.$message('One of the tariffs has already been ordered');
+      }
     }
   }
 }

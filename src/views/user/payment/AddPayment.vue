@@ -46,6 +46,8 @@ export default {
           this.$message('Payment has been created');
           await this.fetchPayments();
           this.payment = ''
+        }else {
+          this.$message('Something went wrong');
         }
       }
     }

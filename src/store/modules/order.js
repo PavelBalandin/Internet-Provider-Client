@@ -17,8 +17,11 @@ export default {
         },
 
         async makeOrder(context) {
-            const res = await axios.post(URL + "/tariffs/order/" + JSON.parse(localStorage.getItem('user')).id, context.state.order, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
-            context.commit('wipeOrder');
+            const res = await axios.post(URL + "/tariffs/order", context.state.order, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
+            if (res.status === 201) {
+                context.commit('wipeOrder');
+            }
+            return res;
         }
     },
 
