@@ -43,6 +43,7 @@
 
 <script>
 import user from "../../store/modules/user";
+import {mapActions} from "vuex";
 
 export default {
   name: "Navbar",
@@ -52,9 +53,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['wipeOrder']),
     logout() {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      this.wipeOrder();
       this.$router.push('/login?message=logout')
     }
   },

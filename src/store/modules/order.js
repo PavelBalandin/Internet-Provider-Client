@@ -12,6 +12,10 @@ export default {
             return false;
         },
 
+        wipeOrder(context) {
+            context.commit('wipeOrder');
+        },
+
         removeTariffFromOrder(context, tariff) {
             context.commit('removeOrder', tariff);
         },
