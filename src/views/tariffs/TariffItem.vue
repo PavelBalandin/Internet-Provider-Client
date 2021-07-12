@@ -23,7 +23,9 @@ export default {
   methods: {
     ...mapActions(['addTariffToOrder']),
     async addTariff() {
-      if (await this.addTariffToOrder(this.tariff)) {
+      if (!JSON.parse(localStorage.getItem('user')) || JSON.parse(localStorage.getItem('user')).roleList[0].name !== 'ROLE_USER') {
+        this.$message('You need to log in as user');
+      } else if (await this.addTariffToOrder(this.tariff)) {
         this.$message('Tariff has been added to order');
       } else {
         this.$message('Tariff is already present in the order');
