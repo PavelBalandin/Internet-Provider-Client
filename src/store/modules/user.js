@@ -6,8 +6,6 @@ const HOST = process.env.VUE_APP_HOST;
 
 export default {
     actions: {
-
-
         async fetchUser(context, login) {
             const res = await axios.get(URL + '/users/' + login, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
             if (res.status === 200) {
@@ -17,13 +15,12 @@ export default {
         },
 
         async registerUser(context, user) {
-            const res = await axios.post(
-                HOST + '/register',
-                user,
-                {
-                    headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}
+            return await axios.post(HOST + '/register', user, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}})
+                .then(function (response) {
+                    return response.status;
+                }).catch(function (error) {
+                    return error.response.status;
                 });
-            return res.status;
         },
 
         async updateUser(context, user) {

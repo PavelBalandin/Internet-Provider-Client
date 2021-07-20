@@ -18,12 +18,12 @@ export default {
   methods: {
     ...mapActions(['makeOrder']),
     async sendOrder() {
-      const res = await this.makeOrder();
-      if (res.status === 201) {
+      const status = await this.makeOrder();
+      if (status === 201) {
         this.$message('Order has been created');
-      } else if (res.data.message === 'Not enough funds') {
+      } else if (status === 402) {
         this.$message('Not enough funds');
-      } else {
+      } else if (status === 409) {
         this.$message('One of the tariffs has already been ordered');
       }
     }

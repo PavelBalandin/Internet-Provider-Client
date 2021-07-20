@@ -21,11 +21,13 @@ export default {
         },
 
         async makeOrder(context) {
-            const res = await axios.post(URL + "/tariffs/order", context.state.order, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
-            if (res.status === 201) {
-                context.commit('wipeOrder');
-            }
-            return res;
+            return await axios.post(URL + "/tariffs/order", context.state.order, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}})
+                .then(function (response) {
+                    context.commit('wipeOrder');
+                    return response.status;
+                }).catch(function (error) {
+                    return error.response.status;
+                });
         }
     },
 
